@@ -10,11 +10,11 @@ node {
     stage('Build image') {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
-         steps {
-                sh 'npm install'
-         }
 
         app = docker.build("interviewdot/hellonode")
+        app.inside {
+            sh 'npm install'
+        }
     }
 
     stage('Test image') {
